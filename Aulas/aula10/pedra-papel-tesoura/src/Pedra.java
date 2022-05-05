@@ -1,14 +1,14 @@
-public class Pedra extends Jogada{
+public class Pedra extends Jogada {
+
 
     public Pedra() {
-        super("Tesoura");
+        super(EnumJogadas.TESOURA,EnumJogadas.LAGARTO);
+
     }
 
     @Override
-    public String getTipo() {
-        return "Pedra";
+    public EnumJogadas getTipo() {
+        return EnumJogadas.PEDRA;
     }
 
-    
-    
 }
