@@ -43,8 +43,7 @@ def flor(t, n, length, degrees):
 
 bob = turtle.Turtle()
 
-flor(bob,10,20,15)
-
+polygon(bob,10000,1)
 
 print(bob)
 turtle.mainloop()
