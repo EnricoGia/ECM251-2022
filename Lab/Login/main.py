@@ -3,7 +3,7 @@
 arquivo_nome = "logs.txt"
 
 
-### Criação e checagem de novo usuário
+# Criação e checagem de novo usuário
 
 arquivo = open(arquivo_nome, "r")
 
@@ -14,7 +14,7 @@ linhas = arquivo.readlines()
 novo = True
 
 for linha in linhas:
-    if (usuario_nome == linha.strip()):
+    if (usuario_nome == linha.strip().split(":")[0]):
         print("Usuário já existe!")
         novo = False
         break
@@ -22,10 +22,11 @@ for linha in linhas:
 arquivo.close()
 
 if (novo):
+    senha = input("Digite uma senha: ")
     arquivo = open(arquivo_nome, "a")
-    arquivo.write(usuario_nome + " \n")
+    arquivo.write(usuario_nome + ":" + senha + "\n")
     print("Usuário %s criado." % usuario_nome)
 
-
-print("Finalizando...")
 arquivo.close()
+###
+print("Finalizando...")
