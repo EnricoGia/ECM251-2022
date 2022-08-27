@@ -1,10 +1,5 @@
 
 
-arquivo_nome = "logs.txt"
-
-# Criação e checagem de novo usuário
-
-
 def novo_usuario():
 
     usuario_nome = input("Digite um novo nome de usuário: ")
@@ -29,12 +24,45 @@ def novo_usuario():
 
     arquivo.close()
 
-def teste():
-    print("Funcionando...")
-### Main
 
-x = {1:novo_usuario,2:teste}
+def logando_usuario():
 
-x[2]()
+    usuario = input("Digite o usuário:")
+    senha = input("Digite a senha:")
+
+    arquivo = open(arquivo_nome, "r")
+    login = (usuario + ":" + senha + "\n")
+
+    linhas = arquivo.readlines()
+
+    aprovado = False
+
+    for linha in linhas:
+        if (linha == login):
+            aprovado = True
+
+    mensagem = "aprovado." if aprovado else "negado."
+
+    print("Login " + mensagem)
+
+    arquivo.close()
+
+
+# Main
+
+arquivo_nome = "logs.txt"
+menu = {1: novo_usuario, 2: logando_usuario}
+
+op = int(input('''
+Opções:
+[1] - Criar um novo usuário
+[2] - Logar com usuário ja existente
+
+->:'''))
+
+
+
+
+menu[op]()
 
 print("Finalizando...")
