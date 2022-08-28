@@ -1,8 +1,11 @@
 
+def finalizar():
+    print("Finalizando...")
+
 
 def novo_usuario():
 
-    usuario_nome = input("Digite um novo nome de usuário: ")
+    usuario_nome = input("Digite um novo nome de usuário:")
 
     arquivo = open(arquivo_nome, "r")
     linhas = arquivo.readlines()
@@ -17,7 +20,7 @@ def novo_usuario():
     arquivo.close()
 
     if (novo):
-        senha = input("Digite uma senha: ")
+        senha = input("Digite uma senha:")
         arquivo = open(arquivo_nome, "a")
         arquivo.write(usuario_nome + ":" + senha + "\n")
         print("Usuário %s criado." % usuario_nome)
@@ -35,34 +38,32 @@ def logando_usuario():
 
     linhas = arquivo.readlines()
 
-    aprovado = False
+    mensagem = "negado"
 
     for linha in linhas:
         if (linha == login):
-            aprovado = True
-
-    mensagem = "aprovado." if aprovado else "negado."
+            mensagem = "aprovado"
+            break
 
     print("Login " + mensagem)
-
     arquivo.close()
 
 
 # Main
-
+conta_atual = ""
 arquivo_nome = "logs.txt"
-menu = {1: novo_usuario, 2: logando_usuario}
+menu = {0: finalizar, 1: novo_usuario, 2: logando_usuario}
+op = 99
 
-op = int(input('''
+while (op != 0):
+    op = int(input('''
+Conta : ''' + conta_atual +
+                   '''
 Opções:
+[0] - Finalizar o programa
 [1] - Criar um novo usuário
-[2] - Logar com usuário ja existente
+[2] - Logar com usuário já existente
 
 ->:'''))
 
-
-
-
-menu[op]()
-
-print("Finalizando...")
+    menu[op]()
