@@ -38,18 +38,24 @@ def logando_usuario():
 
     linhas = arquivo.readlines()
 
-    mensagem = "negado"
+    aprovado = False
 
     for linha in linhas:
         if (linha == login):
-            mensagem = "aprovado"
+            aprovado = True
             break
 
-    print("Login " + mensagem)
     arquivo.close()
 
+    if(aprovado):
+        print("Login aprovado!")
+        return usuario
+    else:
+        print("Login negado!")
+        return ""
 
-# Main
+
+# Main 
 conta_atual = ""
 arquivo_nome = "logs.txt"
 menu = {0: finalizar, 1: novo_usuario, 2: logando_usuario}
@@ -66,4 +72,7 @@ Opções:
 
 ->:'''))
 
-    menu[op]()
+    if(op<2):
+        menu[op]()
+    else:
+        conta_atual = menu[op]()
