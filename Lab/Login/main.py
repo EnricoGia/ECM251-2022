@@ -15,6 +15,7 @@ def novo_usuario():
         if (usuario_nome == linha.strip().split(":")[0]):
             print("Usuário já existe!")
             novo = False
+            
             break
 
     arquivo.close()
@@ -54,15 +55,13 @@ def logando_usuario():
         print("Login negado!")
         return ""
 
+def deslogar():
+    return ""
 
-# Main 
-conta_atual = ""
-arquivo_nome = "logs.txt"
-menu = {0: finalizar, 1: novo_usuario, 2: logando_usuario}
-op = 99
+def opcoes(conta_atual):
 
-while (op != 0):
-    op = int(input('''
+    if(conta_atual == ""):
+        op = int(input('''
 Conta : ''' + conta_atual +
                    '''
 Opções:
@@ -71,6 +70,26 @@ Opções:
 [2] - Logar com usuário já existente
 
 ->:'''))
+    else:
+        op = 10*int(input('''
+Conta : ''' + conta_atual +
+                   '''
+Opções:
+[0] - Finalizar o programa
+[1] - Sair da conta atual
+->:'''))
+
+    return op
+
+# Main 
+conta_atual = ""
+arquivo_nome = "logs.txt"
+menu = {0: finalizar, 1: novo_usuario, 2: logando_usuario, 10:deslogar}
+op = 99
+
+while (op != 0):
+    
+    op = opcoes(conta_atual)
 
     if(op<2):
         menu[op]()
