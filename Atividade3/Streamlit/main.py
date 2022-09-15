@@ -27,7 +27,10 @@ with tab1:
         type = "password")
 
     st.text("")
-    st.button(label= "Entrar", on_click= UserController.checkLogin)
+    st.button(label= "Entrar", on_click= UserController.checkLogin, args = (UserController(),usuario,senha))
+
+    if "Login" in st.session_state:
+        st.markdown("#### Login " + st.session_state["Login"])
 
 with tab2:
     st.title("Profile")

@@ -1,4 +1,5 @@
-from models.user import User
+import streamlit as st
+from src.models.user import User
 
 class UserController():
     def __init__(self):
@@ -17,5 +18,9 @@ class UserController():
         user_test = User(name = name, password = password, email=None)
         for user in self.users:
             if user.name == user_test.name and user.password == user_test.password:
+                st.session_state["Login"] = "aprovado"
                 return True
+        st.session_state["Login"] = "negado"
         return False
+
+    
