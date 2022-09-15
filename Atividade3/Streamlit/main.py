@@ -1,6 +1,9 @@
 
 import streamlit as st
 
+from src.models import product
+from src.controllers.user_controller import UserController
+
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
@@ -15,16 +18,16 @@ with tab1:
 
     st.markdown("***")
 
-    st.text_input(
+    usuario = st.text_input(
         label="Usuário",
         )
 
-    st.text_input(
+    senha = st.text_input(
         label="Senha",
         type = "password")
 
     st.text("")
-    st.button(label= "Entrar")
+    st.button(label= "Entrar", on_click= UserController.checkLogin)
 
 with tab2:
     st.title("Profile")
