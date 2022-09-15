@@ -5,7 +5,7 @@ with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
 
-tab1, tab2, tab3 = st.tabs(["Login", "Profile", "Home"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Login", "Profile", "Home", "Produto", "Carrinho"])
 
 with tab1:
     st.text("")
@@ -38,9 +38,10 @@ with tab2:
         st.image("https://i.scdn.co/image/ab6761610000e5eb9319d939accc1f1e22155955")
     
     with col2:
+        nome ="Ednaldo P."
         st.markdown("***")
         st.markdown("### Nome:")
-        st.markdown("#### Ednaldo P.")
+        st.markdown("#### %s" % nome)
         st.markdown("***")
         st.markdown("### Email:")
         st.markdown("#### Godnaldopereira@gmail.com ")
@@ -69,3 +70,21 @@ with tab3:
     with col1:
         c = st.container()
         c.markdown("## Clipes")
+
+with tab4:
+    col1,col2 = st.columns([2,1])
+    with col1:
+        st.markdown("#")
+        st.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
+    
+    with col2:
+        teste = 0
+        st.markdown("# Cadeira")
+        st.markdown("### R$ 99,00")
+        st.markdown("### 25 Unidades em estoque")
+        st.number_input(label = " ", format = "%i", step = 1, min_value = 0)
+        st.button(label = "Adicionar", help = "Adiciona a quantidade selecionada ao carrinho")
+    
+    st.markdown("***")
+    st.markdown("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt sem et felis molestie, at pulvinar massa sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque in vehicula leo. Vivamus a eleifend dolor, ut porttitor eros. Morbi pharetra scelerisque lorem, sed suscipit eros ultricies vel. In volutpat nibh in erat finibus posuere. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sit amet rhoncus nisi. Nulla sed pulvinar metus. Aenean ligula ante, gravida ut lectus quis, tempor lobortis est. Nulla ac eros pulvinar, hendrerit purus eget, sollicitudin magna. Mauris sit amet massa non tortor tincidunt varius. Suspendisse non ex mauris. Praesent in tellus dictum, egestas lacus nec, aliquam risus.")
+        
