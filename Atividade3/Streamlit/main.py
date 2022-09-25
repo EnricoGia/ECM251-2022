@@ -1,9 +1,11 @@
 
 import streamlit as st
+from src.controllers.product_controller import ProductController
 
 from src.models import product
 from src.controllers.user_controller import UserController
 
+P_Controller = ProductController()
 with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
@@ -41,7 +43,7 @@ with st.sidebar:
         st.markdown("#### Login " + st.session_state["Login"])
 
 if st.session_state['Login'] == 'aprovado':
-    tab1, tab2, tab3, tab4 = st.tabs(["Profile", "Home", "Produto", "Carrinho"])
+    tab1, tab2, tab4 = st.tabs(["Profile", "Home", "Carrinho"])
     with tab1:
         st.title("Profile")
 
@@ -72,34 +74,37 @@ if st.session_state['Login'] == 'aprovado':
         
         with col1:
             c = st.container()
-            c.markdown("## Cadeira")
-            c.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
-            c.markdown("#### R$ 99,00")
-            c.markdown("#### 25 Unidades em estoque")
-            c.number_input(label = "", format = "%i", step = 1,min_value = 0)
+            prdct = P_Controller.get_product(index = 0)
+            c.markdown("## %s" % prdct._name)
+            c.image("%s" % prdct._url)
+            c.markdown("#### R$ %.2f" % prdct._price)
+            quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 0)
             c.button(label = "Adicionar")
         with col2:
             c = st.container()
-            c.markdown("## Bola")
+            prdct = P_Controller.get_product(index = 1)
+            c.markdown("## %s" % prdct._name)
+            c.image("%s" % prdct._url)
+            c.markdown("#### R$ %.2f" % prdct._price)
+            quantity = c.number_input(label = "", format = "%i", step = 1,min_value = 0,key=3)
+            c.button(label = "Adicionar",key = 3)
         
         with col1:
             c = st.container()
-            c.markdown("## Clipes")
-
-    with tab3:
-        col1,col2 = st.columns([2,1])
-        with col1:
-            st.markdown("#")
-            st.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
-        
+            prdct = P_Controller.get_product(index = 2)
+            c.markdown("## %s" % prdct._name)
+            c.image("%s" % prdct._url)
+            c.markdown("#### R$ %.2f" % prdct._price)
+            c.number_input(label = "", format = "%i", step = 1,min_value = 0,key = 4)
+            c.button(label = "Adicionar",key = 4)
         with col2:
-            teste = 0
-            st.markdown("# Cadeira")
-            st.markdown("### R$ 99,00")
-            st.markdown("### 25 Unidades em estoque")
-            st.number_input(label = " ", format = "%i", step = 1, min_value = 0)
-            st.button(label = "Adicionar", help = "Adiciona a quantidade selecionada ao carrinho")
-        
-        st.markdown("***")
-        st.markdown("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt sem et felis molestie, at pulvinar massa sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque in vehicula leo. Vivamus a eleifend dolor, ut porttitor eros. Morbi pharetra scelerisque lorem, sed suscipit eros ultricies vel. In volutpat nibh in erat finibus posuere. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sit amet rhoncus nisi. Nulla sed pulvinar metus. Aenean ligula ante, gravida ut lectus quis, tempor lobortis est. Nulla ac eros pulvinar, hendrerit purus eget, sollicitudin magna. Mauris sit amet massa non tortor tincidunt varius. Suspendisse non ex mauris. Praesent in tellus dictum, egestas lacus nec, aliquam risus.")
+            c = st.container()
+            prdct = P_Controller.get_product(index = 3)
+            c.markdown("## %s" % prdct._name)
+            c.image("%s" % prdct._url)
+            c.markdown("#### R$ %.2f" % prdct._price)
+            c.number_input(label = "", format = "%i", step = 1,min_value = 0,key=5)
+            c.button(label = "Adicionar",key = 5)
+
+    
             
