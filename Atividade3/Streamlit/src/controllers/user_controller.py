@@ -26,5 +26,5 @@ class UserController():
         st.session_state["Login"] = "negado"
         return False
 
-    def exit_login(self,name,password):
+    def exit_login(self):
         st.session_state["Login"] = "negado"

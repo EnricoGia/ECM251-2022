@@ -6,3 +6,6 @@ class Product():
 
     def __str__(self)->str:
         return f'Product(name:{self._name}, price:{self._price}, url:{self._url}'
+    
+    def get_name(self):
+        return self._name
