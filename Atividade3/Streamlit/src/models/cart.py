@@ -10,3 +10,6 @@ class Cart():
     
     def __str__(self):
         return self._products
+    
+    def get_products(self):
+        return self._products

@@ -9,3 +9,6 @@ class Product():
     
     def get_name(self):
         return self._name
+    
+    def get_price(self):
+        return self._price
