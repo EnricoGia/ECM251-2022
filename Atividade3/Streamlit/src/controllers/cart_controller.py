@@ -14,8 +14,16 @@ class CartController():
         self._cart._products.append([product,quantity])
         print(self._cart._products)
 
-    def get_products(self):
-        return self._cart.get_products()
     
     def calculate_price(self,product,quantity):
         return (product.get_price()*quantity)
+
+    def get_cart(self):
+        return self._cart
+
+    def total_price(self):
+        products = self.get_cart().get_products()
+        total = 0
+        for i in products:
+           total += (i[0].get_price()*i[1])
+        return total

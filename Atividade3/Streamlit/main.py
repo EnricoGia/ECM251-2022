@@ -117,11 +117,26 @@ if st.session_state['Login'] == 'aprovado':
             c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 5)
     with tab3:
         if 'Cart' in st.session_state:
-            c = st.container()
-            with c :
-                col1,col2,col3,col4 = st.columns(4)
+
+            row = st.container()
+            col1,col2,col3,col4 = st.columns(4)
+            col1.markdown("##### Produto")
+            col2.markdown("##### Preço unitário")
+            col3.markdown("##### Quantidade")
+            col4.markdown("##### Preço conjunto")
+            with row :
+                for i in st.session_state['Cart'].get_cart().get_products():
+                        col1.markdown("#### %s" % i[0].get_name())
+                        col2.markdown("#### R\$ %.2f" %  i[0].get_price())
+                        col3.markdown("#### %s" % i[1])
+                        col4.markdown("#### R\$ %.2f" % (i[0].get_price()*i[1]))
+
+            st.markdown("***")
+            col1,col2 = st.columns(2)
+
+             
+            col1.markdown("# Preço Total:")
+            col2.markdown("# R\$ %.2f" % st.session_state['Cart'].total_price())
             
-                for i in st.session_state['Cart'].get_products():
-                    with col4:
-                        c.markdown("%s R\$ %s  %s R\$ %s" % (i[0].get_name(), i[0].get_price(),i[1],(i[0].get_price()*i[1])))
+            
    
