@@ -9,7 +9,6 @@ from src.models import cart
 
 
 P_Controller = ProductController()
-# Cart_Controller = CartController()
 User_Controller = UserController()
 
 with open("style.css") as f:
@@ -22,38 +21,34 @@ if 'Login' not in st.session_state:
     st.session_state['Cart'] = CartController()
 
 with st.sidebar:
-    st.text("")
-    st.text("")
+    if st.session_state['Login'] =='negado':
+        st.text("")
+        st.text("")
 
-    st.title("Login")
+        st.title("Login")
 
-    st.markdown("***")
+        st.markdown("***")
 
-    usuario = st.text_input(
-        label="Usuário",
-        )
+        usuario = st.text_input(
+            label="Usuário",
+            )
 
-    senha = st.text_input(
-        label="Senha",
-        type = "password")
+        senha = st.text_input(
+            label="Senha",
+            type = "password")
 
-    st.text("")
-    col1,col2 = st.columns(2)
-    
+        st.text("")
 
-    with col1:
         st.button(label= "Entrar", on_click= User_Controller.checkLogin, args = (usuario,senha))
+    if st.session_state['Login'] =='aprovado':
+            st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
+            st.button(label= "Sair", on_click= User_Controller.exit_login)
 
-    with col2:
-        st.button(label= "Sair", on_click= User_Controller.exit_login)
-
-    if "Login" in st.session_state:
-        st.markdown("#### Login " + st.session_state["Login"])
 
 if st.session_state['Login'] == 'aprovado':
-    tab1, tab2, tab3 = st.tabs(["Profile", "Home", "Carrinho"])
+    tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
     with tab1:
-        st.title("Profile")
+        st.title("Perfil")
 
         st.markdown("***")
 
@@ -83,36 +78,36 @@ if st.session_state['Login'] == 'aprovado':
         with col1:
             c = st.container()
             prdct = P_Controller.get_product(index = 0)
-            c.markdown("## %s" % prdct._name)
-            c.image("%s" % prdct._url)
-            c.markdown("#### R$ %.2f" % prdct._price)
+            c.markdown("## %s" % prdct.get_name())
+            c.image("%s" % prdct.get_url())
+            c.markdown("#### R$ %.2f" % prdct.get_price())
             quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1)
             c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity))
             
         with col2:
             c = st.container()
             prdct = P_Controller.get_product(index = 1)
-            c.markdown("## %s" % prdct._name)
-            c.image("%s" % prdct._url)
-            c.markdown("#### R$ %.2f" % prdct._price)
+            c.markdown("## %s" % prdct.get_name())
+            c.image("%s" % prdct.get_url())
+            c.markdown("#### R$ %.2f" % prdct.get_price())
             quantity = c.number_input(label = "", format = "%i", step = 1,min_value =1,key=3)
             c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 3)
         
         with col1:
             c = st.container()
             prdct = P_Controller.get_product(index = 2)
-            c.markdown("## %s" % prdct._name)
-            c.image("%s" % prdct._url)
-            c.markdown("#### R$ %.2f" % prdct._price)
+            c.markdown("## %s" % prdct.get_name())
+            c.image("%s" % prdct.get_url())
+            c.markdown("#### R$ %.2f" % prdct.get_price())
             quantity = c.number_input(label = "", format = "%i", step = 1,min_value = 1,key = 4)
             c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 4)
 
         with col2:
             c = st.container()
             prdct = P_Controller.get_product(index = 3)
-            c.markdown("## %s" % prdct._name)
-            c.image("%s" % prdct._url)
-            c.markdown("#### R$ %.2f" % prdct._price)
+            c.markdown("## %s" % prdct.get_name())
+            c.image("%s" % prdct.get_url())
+            c.markdown("#### R$ %.2f" % prdct.get_price())
             quantity = c.number_input(label = "", format = "%i", step = 1,min_value = 1,key=5)
             c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 5)
     with tab3:

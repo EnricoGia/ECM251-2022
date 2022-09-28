@@ -12,3 +12,6 @@ class Product():
     
     def get_price(self):
         return self._price
+    
+    def get_url(self):
+        return self._url
