@@ -60,6 +60,8 @@ public class Jogo {
     public void ordenaTipo() {
         Collections.sort(this.tipos);
     }
+
+
     @Override
     public String toString() {
         return "Jogo [nome = " + nome + ", descricao = " + descricao + ", preco = " + preco + ", tipo = " + tipos + "]";
