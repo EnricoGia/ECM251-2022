@@ -8,11 +8,10 @@ class CartController():
         for i in range(len(self._cart._products)):
             if self._cart._products[i][0].get_name() == product.get_name():
                 self._cart._products[i][1] += quantity
-                print(self._cart._products)
                 return
 
         self._cart._products.append([product,quantity])
-        print(self._cart._products)
+       
 
     
     def calculate_price(self,product,quantity):

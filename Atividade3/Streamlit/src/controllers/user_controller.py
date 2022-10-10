@@ -1,5 +1,6 @@
 import streamlit as st
 from src.models.user import User
+from src.controllers.cart_controller import CartController
 
 class UserController():
     def __init__(self):
@@ -28,3 +29,4 @@ class UserController():
 
     def exit_login(self):
         st.session_state["Login"] = "negado"
+        st.session_state['Cart'] = CartController()

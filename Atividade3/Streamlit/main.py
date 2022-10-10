@@ -29,17 +29,17 @@ with st.sidebar:
 
         st.markdown("***")
 
-        usuario = st.text_input(
+        user = st.text_input(
             label="Usuário",
             )
 
-        senha = st.text_input(
+        password = st.text_input(
             label="Senha",
             type = "password")
 
         st.text("")
 
-        st.button(label= "Entrar", on_click= User_Controller.checkLogin, args = (usuario,senha))
+        st.button(label= "Entrar", on_click= User_Controller.checkLogin, args = (user,password))
     if st.session_state['Login'] =='aprovado':
             st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
             st.button(label= "Sair", on_click= User_Controller.exit_login)
@@ -56,7 +56,7 @@ if st.session_state['Login'] == 'aprovado':
 
         with col1:
             st.markdown("#")
-            st.image("https://i.scdn.co/image/ab6761610000e5eb9319d939accc1f1e22155955")
+            st.image("https://cdn-icons-png.flaticon.com/512/17/17004.png")
         
         with col2:
             st.markdown("***")
