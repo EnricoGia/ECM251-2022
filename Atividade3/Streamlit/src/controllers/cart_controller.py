@@ -1,3 +1,5 @@
+# Enrico Giannobile 19.00610-0
+
 from src.models.cart import Cart
 class CartController():
     def __init__(self):
@@ -5,12 +7,12 @@ class CartController():
 
     def add_product(self,product,quantity):
         
-        for i in range(len(self._cart._products)):
-            if self._cart._products[i][0].get_name() == product.get_name():
-                self._cart._products[i][1] += quantity
+        for i in range(len(self.get_cart().get_products())):
+            if self.get_cart().get_products()[i][0].get_name() == product.get_name():
+                self.get_cart().get_products()[i][1] += quantity
                 return
 
-        self._cart._products.append([product,quantity])
+        self.get_cart().get_products().append([product,quantity])
        
 
     

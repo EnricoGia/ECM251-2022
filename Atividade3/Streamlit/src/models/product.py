@@ -1,3 +1,5 @@
+# Enrico Giannobile 19.00610-0
+
 class Product():
     def __init__(self, name, price, url):
         self._name = name
@@ -5,7 +7,7 @@ class Product():
         self._url = url
 
     def __str__(self)->str:
-        return f'Product(name:{self._name}, price:{self._price}, url:{self._url}'
+        return f'Product(name:{self.get_name()}, price:{self.get_price()}, url:{self.get_url()}'
     
     def get_name(self):
         return self._name

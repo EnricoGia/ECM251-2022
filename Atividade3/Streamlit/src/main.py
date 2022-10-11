@@ -1,11 +1,11 @@
+# Enrico Giannobile 19.00610-0
 
 import streamlit as st
-from src.controllers.product_controller import ProductController
 
-from src.models import product
+from src.controllers.product_controller import ProductController
 from src.controllers.user_controller import UserController
 from src.controllers.cart_controller import CartController
-from src.models import cart
+
 
 
 P_Controller = ProductController()
@@ -40,6 +40,7 @@ with st.sidebar:
         st.text("")
 
         st.button(label= "Entrar", on_click= User_Controller.checkLogin, args = (user,password))
+
     if st.session_state['Login'] =='aprovado':
             st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
             st.button(label= "Sair", on_click= User_Controller.exit_login)
