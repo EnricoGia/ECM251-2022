@@ -15,7 +15,7 @@ public class Review {
     public String toString() {
         return ("\n\nUsuário: " + usuario.getNickname() +
                 "\nRecomenda: " + this.recomenda2String() +
-                "\n" + this.texto);
+                "\n \" "  + this.texto + " \"");
     }
 
     public String recomenda2String() {
