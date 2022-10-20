@@ -16,3 +16,6 @@ for item in itens:
 
 item = controller.pegar_item("CAF")
 print(item)
+
+items = controller.buscar_todos_itens_nome("Aula")
+print(items)

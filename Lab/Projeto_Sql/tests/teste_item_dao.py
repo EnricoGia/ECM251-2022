@@ -10,3 +10,5 @@ item.nome = "NVIDIA RTX4090"
 item.preco = 135000
 
 print(ItemDAO.get_instance().atualizar_item(item))
+
+print(ItemDAO.get_instance().deletar_item(item.id))
