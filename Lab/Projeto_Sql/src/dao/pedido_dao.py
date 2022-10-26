@@ -48,20 +48,20 @@ class PedidoDAO:
         self.conn.commit()
         self.cursor.close()
     
-    def pegar_Pedido(self,id):
+    def pegar_pedido(self, numero_pedido):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
             SELECT * FROM Pedidos
-            WHERE id = '{id}';
+            WHERE numero_pedido = '{numero_pedido}';
         """)
-        Pedido = None
-        resultado =  self.cursor.fetchone()
-        if resultado:
-            Pedido = Pedido(id=resultado[0], nome=resultado[1], preco=resultado[2])
+        resultados = []
+        for resultado in self.cursor.fetchall():
+            resultados.append(Pedido(id=resultado[0], id_item=resultado[1], id_cliente=resultado[2], quantidade = resultado[3], numero_pedido = resultado[4], data_hora = resultado[5]))
         self.cursor.close()
-        return Pedido
+        return resultados
 
-    def atualizar_Pedido(self,Pedido):
+    #TODO
+    def atualizar_pedido(self,Pedido):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
@@ -75,8 +75,8 @@ class PedidoDAO:
         except:
             return False
         return True
-
-    def deletar_Pedido(self,id):
+    #TODO
+    def deletar_pedido(self,id):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
@@ -88,7 +88,7 @@ class PedidoDAO:
         except:
             return False
         return True
-
+    #TODO
     def search_all_for_name(self,nome):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""

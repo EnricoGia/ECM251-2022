@@ -1,7 +1,8 @@
 from src.controllers.item_controller import ItemController
 from src.dao.pedido_dao import PedidoDAO
+from src.models.pedido import Pedido
 
-class ItemController:
+class PedidoController:
     def __init__(self) -> None:
         pass
 
@@ -13,3 +14,6 @@ class ItemController:
             item = item_controller.pegar_item(item_id)
             total += item.preco * quantidade
         return total
+    
+    def pegar_pedido(self, numero_pedido) -> list[Pedido]:
+        return PedidoDAO.get_instance().pegar_pedido(numero_pedido)
