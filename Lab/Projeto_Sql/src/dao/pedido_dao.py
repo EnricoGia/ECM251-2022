@@ -27,7 +27,7 @@ class PedidoDAO:
         self.cursor.close()
         return resultados
     
-    def inserir_Pedido(self, pedido):
+    def inserir_pedido(self, pedido):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
             INSERT INTO Pedidos (
@@ -44,7 +44,7 @@ class PedidoDAO:
                 '{pedido.numero_pedido}',
                 '{pedido.data_hora}'
             );
-        """, (pedido.id, pedido.nome, pedido.preco))
+        """)
         self.conn.commit()
         self.cursor.close()
     
@@ -64,11 +64,11 @@ class PedidoDAO:
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
-                UPDATE Pedidos SET 
+                UPDATE Pedidos SET
                 id_item = '{pedido.id_item}',
                 quantidade = {pedido.quantidade},
                 data_hora = '{pedido.data_hora}'
-                WHERE id = '{pedido.id}' 
+                WHERE id = {pedido.id}
             """)
             self.conn.commit()
             self.cursor.close()
@@ -88,15 +88,4 @@ class PedidoDAO:
         except:
             return False
         return True
-    #TODO
-    def search_all_for_name(self,nome):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Pedidos
-            WHERE nome LIKE '{nome}%'; 
-        """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Pedido(id=resultado[0], nome=resultado[1], preco=resultado[2]))
-        self.cursor.close()
-        return resultados
+    
