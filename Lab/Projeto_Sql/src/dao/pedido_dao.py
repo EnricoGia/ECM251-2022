@@ -44,7 +44,7 @@ class PedidoDAO:
                 '{pedido.numero_pedido}',
                 '{pedido.data_hora}'
             );
-        """, (Pedido.id, Pedido.nome, Pedido.preco))
+        """, (pedido.id, pedido.nome, pedido.preco))
         self.conn.commit()
         self.cursor.close()
     
@@ -60,15 +60,15 @@ class PedidoDAO:
         self.cursor.close()
         return resultados
 
-    #TODO
-    def atualizar_pedido(self,Pedido):
+    def atualizar_pedido(self, pedido):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
                 UPDATE Pedidos SET 
-                nome = '{Pedido.nome}',
-                preco = {Pedido.preco}
-                WHERE id = '{Pedido.id}' 
+                id_item = '{pedido.id_item}',
+                quantidade = {pedido.quantidade},
+                data_hora = '{pedido.data_hora}'
+                WHERE id = '{pedido.id}' 
             """)
             self.conn.commit()
             self.cursor.close()
