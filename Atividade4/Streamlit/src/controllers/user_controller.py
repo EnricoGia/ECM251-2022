@@ -14,7 +14,7 @@ class UserController():
     def checkUser(self,user):
         return user in self.users
 
-    def checkLogin(self, email, password):
+    def check_login(self, email, password):
         try:
             user_test = User(name = None, password = password, email = email)
             for user in self.users:
@@ -31,3 +31,12 @@ class UserController():
     def exit_login(self):
         st.session_state["Login"] = "negado"
         st.session_state['Cart'] = CartController()
+
+    def tela_registro(self):
+        st.session_state["Login"] = "registro"
+
+    def registrar_login(self, name, email, password, cpf):
+        UserDAO.get_instance().registrar_login(name, email, password, cpf)
+
+    def get_all_info(self):
+        return UserDAO.get_instance().get_all_info()

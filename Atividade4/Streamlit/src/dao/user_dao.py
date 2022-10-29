@@ -26,5 +26,26 @@ class UserDAO:
             resultados.append(User(name=resultado[1], email=resultado[2], password=resultado[3]))
         self.cursor.close()
         return resultados
+
+    def registrar_login(self, name, email, password, cpf):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            INSERT INTO Users (name, email, password, cpf)
+            VALUES(?,?,?,?);
+        """, (name, email, password, cpf))
+        self.conn.commit()
+        self.cursor.close()
+    
+    def get_all_info(self):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            SELECT * FROM Users;
+        """)
+        resultados = []
+        for resultado in self.cursor.fetchall():
+            resultados.append(str(resultado[0]) + " " + resultado[1] + " " + resultado[2] + " " + resultado[3] + " " + resultado[4] + " ")
+        self.cursor.close()
+        return resultados
+
     
     

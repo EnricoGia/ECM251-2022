@@ -15,13 +15,15 @@ with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
 if 'Login' not in st.session_state:
+    for user in User_Controller.get_all_info():
+        print(user)
     st.session_state['Login'] = 'negado'
     st.session_state['Usuario'] = ''
     st.session_state['Email'] = ''
     st.session_state['Cart'] = CartController()
 
 with st.sidebar:
-    if st.session_state['Login'] !='aprovado':
+    if st.session_state['Login'] == 'errado' or st.session_state['Login'] == 'negado':
         st.text("")
         st.text("")
 
@@ -29,7 +31,7 @@ with st.sidebar:
 
         st.markdown("***")
 
-        user = st.text_input(
+        email = st.text_input(
             label="Email",
             )
 
@@ -38,12 +40,42 @@ with st.sidebar:
             type = "password")
 
         st.text("")
-
-        st.button(label= "Entrar", on_click= User_Controller.checkLogin, args = (user,password))
+        col1, col2 = st.columns(2)
+        with col1:
+            st.button(label= "Entrar", on_click= User_Controller.check_login, args = (email,password))
+        with col2:
+            st.button(label = "Novo registro", on_click = User_Controller.tela_registro)
 
     if st.session_state['Login'] =='aprovado':
-            st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
-            st.button(label= "Sair", on_click= User_Controller.exit_login)
+        st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
+        st.button(label= "Sair", on_click= User_Controller.exit_login)
+    
+    if st.session_state['Login'] =='registro':
+        st.text("")
+        st.text("")
+
+        st.title("Novo login")
+
+        st.markdown("***")
+
+        name = st.text_input(
+            label="Usuário"
+            )
+        email = st.text_input(
+            label = "Email"
+        )
+        password = st.text_input(
+            label="Senha",
+            type = "password")
+        cpf = st.text_input(
+            label = "CPF"
+        )
+
+        col1,col2 = st.columns(2)
+        with col1:
+            st.button(label = "Voltar", on_click = User_Controller.exit_login)
+        with col2:
+            st.button(label = "Registrar", on_click = User_Controller.registrar_login, args = (name, email, password, cpf))
 
 if st.session_state['Login'] == 'errado':
 
