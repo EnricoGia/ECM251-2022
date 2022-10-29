@@ -30,7 +30,7 @@ with st.sidebar:
         st.markdown("***")
 
         user = st.text_input(
-            label="Usuário",
+            label="Email",
             )
 
         password = st.text_input(

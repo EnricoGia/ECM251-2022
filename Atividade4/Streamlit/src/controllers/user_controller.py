@@ -14,11 +14,11 @@ class UserController():
     def checkUser(self,user):
         return user in self.users
 
-    def checkLogin(self, name, password):
+    def checkLogin(self, email, password):
         try:
-            user_test = User(name = name, password = password, email=None)
+            user_test = User(name = None, password = password, email = email)
             for user in self.users:
-                if user.get_name() == user_test.get_name() and user.get_password() == user_test.get_password():
+                if user.get_email() == user_test.get_email() and user.get_password() == user_test.get_password():
                     st.session_state["Login"] = "aprovado"
                     st.session_state['Usuario'] = user.get_name()
                     st.session_state['Email'] = user.get_email()
