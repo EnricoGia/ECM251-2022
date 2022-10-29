@@ -1,19 +1,22 @@
 """
 
-DROP TABLE Usuarios;
 
-CREATE TABLE Usuarios(
+CREATE TABLE Users(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome TEXT NOT NULL,
+      name TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
-      senha TEXT NOT NULL,
-      cpf INTEGER NOT NULL UNIQUE
+      password TEXT NOT NULL,
+      cpf TEXT NOT NULL UNIQUE
 );
 
-INSERT INTO Usuarios (nome, email, senha, cpf)
+INSERT INTO Users (name, email, password, cpf)
 VALUES("Edx","Edx@gmail.com","12345","23412341");
 
-SELECT * FROM Usuarios;
+SELECT * FROM Users;
+
+
+
+
 
 """
 
