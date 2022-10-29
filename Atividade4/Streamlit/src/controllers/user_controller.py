@@ -3,17 +3,13 @@
 import streamlit as st
 from src.models.user import User
 from src.controllers.cart_controller import CartController
+from src.dao.user_dao import UserDAO
 
 class UserController():
     def __init__(self):
         # Carrega os dados dos usuários
-        self.users = [
-        User(name="João", password = "arroz", email = "joao@gmail.com"),
-        User(name="João2", password = "arroz2", email = "joao2@gmail.com"),
-        User(name ="tais", password="petacular", email = "tais@perando.com"),
-        User(name="usuario", password ="senha", email = "padrao@gmail.com")
-
-        ]
+        self.users = UserDAO.get_instance().get_all()
+        
     
     def checkUser(self,user):
         return user in self.users

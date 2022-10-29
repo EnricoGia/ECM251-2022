@@ -7,7 +7,7 @@ class User():
         self._password = password
     
     def __str__(self)->str:
-        return f'User(name:{self.get_name()}, email:{self.get_email()}, password:{self.get_password()}'
+        return f'User(name:{self.get_name()}, email:{self.get_email()}, password:{self.get_password()})'
 
     def get_name(self):
         return self._name
