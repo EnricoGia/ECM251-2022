@@ -23,10 +23,10 @@ class UserController():
                     st.session_state['Usuario'] = user.get_name()
                     st.session_state['Email'] = user.get_email()
                     return True
-            st.session_state["Login"] = "negado"
+            st.session_state["Login"] = "errado"
             return False
         except:
-            st.session_state["Login"] = "negado"
+            st.session_state["Login"] = "errado"
 
     def exit_login(self):
         st.session_state["Login"] = "negado"

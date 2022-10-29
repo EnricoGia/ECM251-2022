@@ -21,7 +21,7 @@ if 'Login' not in st.session_state:
     st.session_state['Cart'] = CartController()
 
 with st.sidebar:
-    if st.session_state['Login'] =='negado':
+    if st.session_state['Login'] !='aprovado':
         st.text("")
         st.text("")
 
@@ -45,7 +45,11 @@ with st.sidebar:
             st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
             st.button(label= "Sair", on_click= User_Controller.exit_login)
 
+if st.session_state['Login'] == 'errado':
 
+    st.markdown("***")
+    st.markdown("# Email ou senha incorreto!")
+        
 if st.session_state['Login'] == 'aprovado':
     tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
     with tab1:
