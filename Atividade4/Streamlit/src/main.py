@@ -122,7 +122,7 @@ if st.session_state['Login'] == 'aprovado':
             with col1:
                 st.button(label = "Voltar", on_click = User_Controller.change_profile_screen_back)
             with col2:
-                st.button(label = "Mudar", on_click = User_Controller.change_profile, args = (email,password))   
+                st.button(label = "Mudar", on_click = User_Controller.change_profile, args = (email,password,st.session_state["Email"]))   
     with tab2:
 
         st.title("Home")

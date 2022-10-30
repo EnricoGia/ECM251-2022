@@ -37,10 +37,10 @@ class UserDAO:
             """, (name, email, password, cpf))
             self.conn.commit()
             self.cursor.close()
-            st.markdown("# Login registrado")
+            st.success("# Login registrado")
 
         except Exception:
-            st.markdown("# CPF ou Email já registrado!")
+            st.warning("# CPF ou Email já registrado!")
 
 
     
@@ -54,6 +54,23 @@ class UserDAO:
             resultados.append(str(resultado[0]) + " " + resultado[1] + " " + resultado[2] + " " + resultado[3] + " " + resultado[4] + " ")
         self.cursor.close()
         return resultados
+    
+    def change_profile(self, email, password, email_now):
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute(f"""
+                UPDATE Users SET 
+                email = '{email}',
+                password = '{password}'
+                WHERE email = '{email_now}' 
+            """)
+            self.cursor.close()
+            st.markdown("Informações atualizadas")
+            st.session_state["Email"] = email
+        except Exception:
+            st.markdown("Email já utilizado")
+        
+
 
     
     
