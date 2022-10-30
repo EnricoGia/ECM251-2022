@@ -1,4 +1,5 @@
 import sqlite3
+import streamlit as st
 from src.models.user import User
 class UserDAO:
     
@@ -28,13 +29,20 @@ class UserDAO:
         return resultados
 
     def registrar_login(self, name, email, password, cpf):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            INSERT INTO Users (name, email, password, cpf)
-            VALUES(?,?,?,?);
-        """, (name, email, password, cpf))
-        self.conn.commit()
-        self.cursor.close()
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute("""
+                INSERT INTO Users (name, email, password, cpf)
+                VALUES(?,?,?,?);
+            """, (name, email, password, cpf))
+            self.conn.commit()
+            self.cursor.close()
+            st.markdown("# Login registrado")
+            
+        except Exception:
+            st.markdown("# CPF ou Email já registrado!")
+
+
     
     def get_all_info(self):
         self.cursor = self.conn.cursor()
