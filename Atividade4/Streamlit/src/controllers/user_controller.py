@@ -30,13 +30,23 @@ class UserController():
 
     def exit_login(self):
         st.session_state["Login"] = "negado"
+        st.session_state["Profile"] = "info"
         st.session_state['Cart'] = CartController()
 
-    def tela_registro(self):
+    def register_screen(self):
         st.session_state["Login"] = "registro"
 
-    def registrar_login(self, name, email, password, cpf):
-        UserDAO.get_instance().registrar_login(name, email, password, cpf)
+    def register_login(self, name, email, password, cpf):
+        UserDAO.get_instance().register_login(name, email, password, cpf)
 
     def get_all_info(self):
         return UserDAO.get_instance().get_all_info()
+    
+    def change_profile_screen(self):
+        st.session_state["Profile"] = "changes"
+    
+    def change_profile_screen_back(self):
+        st.session_state["Profile"] = "info"
+    
+    def change_profile(self, email, password):
+        st.markdown(f"{email}  {password}")

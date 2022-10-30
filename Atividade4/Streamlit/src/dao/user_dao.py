@@ -28,7 +28,7 @@ class UserDAO:
         self.cursor.close()
         return resultados
 
-    def registrar_login(self, name, email, password, cpf):
+    def register_login(self, name, email, password, cpf):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute("""
@@ -38,7 +38,7 @@ class UserDAO:
             self.conn.commit()
             self.cursor.close()
             st.markdown("# Login registrado")
-            
+
         except Exception:
             st.markdown("# CPF ou Email já registrado!")
 

@@ -20,6 +20,7 @@ if 'Login' not in st.session_state:
     st.session_state['Login'] = 'negado'
     st.session_state['Usuario'] = ''
     st.session_state['Email'] = ''
+    st.session_state['Profile'] = "info"
     st.session_state['Cart'] = CartController()
 
 with st.sidebar:
@@ -44,7 +45,7 @@ with st.sidebar:
         with col1:
             st.button(label= "Entrar", on_click= User_Controller.check_login, args = (email,password))
         with col2:
-            st.button(label = "Novo registro", on_click = User_Controller.tela_registro)
+            st.button(label = "Novo registro", on_click = User_Controller.register_screen)
 
     if st.session_state['Login'] =='aprovado':
         st.markdown("Bem vindo, %s" % st.session_state['Usuario'])
@@ -65,7 +66,7 @@ with st.sidebar:
             label = "Email"
         )
         password = st.text_input(
-            label="Senha",
+            label= "Senha",
             type = "password")
         cpf = st.text_input(
             label = "CPF"
@@ -75,7 +76,7 @@ with st.sidebar:
         with col1:
             st.button(label = "Voltar", on_click = User_Controller.exit_login)
         with col2:
-            st.button(label = "Registrar", on_click = User_Controller.registrar_login, args = (name, email, password, cpf))
+            st.button(label = "Registrar", on_click = User_Controller.register_login, args = (name, email, password, cpf))
 
 if st.session_state['Login'] == 'errado':
 
@@ -85,25 +86,43 @@ if st.session_state['Login'] == 'errado':
 if st.session_state['Login'] == 'aprovado':
     tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
     with tab1:
-        st.title("Perfil")
+        if st.session_state['Profile'] == "info":
+            st.title("Perfil")
 
-        st.markdown("***")
+            st.markdown("***")
 
-        col1,col2 = st.columns(2)
+            col1,col2 = st.columns(2)
 
-        with col1:
-            st.markdown("#")
-            st.image("https://cdn-icons-png.flaticon.com/512/17/17004.png")
+            with col1:
+                st.markdown("#")
+                st.image("https://cdn-icons-png.flaticon.com/512/17/17004.png")
+            
+            with col2:
+                st.markdown("***")
+                st.markdown("### Nome:")
+                st.markdown("#### %s" % st.session_state["Usuario"])
+                st.markdown("***")
+                st.markdown("### Email:")
+                st.markdown("#### %s" % st.session_state["Email"])
+                st.markdown("***")
+                st.button(label = "Mudar informações de login", on_click = User_Controller.change_profile_screen)
         
-        with col2:
-            st.markdown("***")
-            st.markdown("### Nome:")
-            st.markdown("#### %s" % st.session_state["Usuario"])
-            st.markdown("***")
-            st.markdown("### Email:")
-            st.markdown("#### %s" % st.session_state["Email"])
-            st.markdown("***")
+        if st.session_state["Profile"] == "changes":
+            st.title("Novas informações de login")
 
+            st.markdown("***")
+            email = st.text_input(
+            label = "Novo email"
+        )
+            password = st.text_input(
+                label= "Nova senha",
+                type = "password")
+
+            col1,col2 = st.columns(2)
+            with col1:
+                st.button(label = "Voltar", on_click = User_Controller.change_profile_screen_back)
+            with col2:
+                st.button(label = "Mudar", on_click = User_Controller.change_profile, args = (email,password))   
     with tab2:
 
         st.title("Home")
