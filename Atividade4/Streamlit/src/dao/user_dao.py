@@ -66,9 +66,10 @@ class UserDAO:
             """)
             self.cursor.close()
             st.markdown("Informações atualizadas")
-            st.session_state["Email"] = email
+            return True
         except Exception:
             st.markdown("Email já utilizado")
+            return False
         
 
 

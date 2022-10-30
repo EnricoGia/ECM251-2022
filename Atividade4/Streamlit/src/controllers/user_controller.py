@@ -49,4 +49,5 @@ class UserController():
         st.session_state["Profile"] = "info"
     
     def change_profile(self, email, password, email_now):
-        UserDAO.get_instance().change_profile(email, password, email_now)
+        if(UserDAO.get_instance().change_profile(email, password, email_now)):
+            st.session_state["Email"] = email
