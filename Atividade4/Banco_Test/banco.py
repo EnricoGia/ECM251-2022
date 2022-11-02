@@ -19,7 +19,7 @@ SELECT * FROM Users;
 CREATE TABLE Products(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      price FLOAT NOT NULL UNIQUE,
+      price FLOAT NOT NULL,
       url TEXT NOT NULL
 );
 

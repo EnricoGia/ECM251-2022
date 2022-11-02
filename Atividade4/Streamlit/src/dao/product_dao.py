@@ -27,14 +27,17 @@ class ProductDAO:
         self.cursor.close()
         return resultados
     
-    def inserir_item(self,item):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            INSERT INTO Itens (id, nome, preco)
-            VALUES(?,?,?);
-        """, (item.id, item.nome, item.preco))
-        self.conn.commit()
-        self.cursor.close()
+    def register_product(self, name, price, url):
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute("""
+                INSERT INTO Products (name, price, url)
+                VALUES(?,?,?);
+            """, (name, price, url))
+            self.conn.commit()
+            self.cursor.close()
+        except Exception:
+            pass
     
     def pegar_item(self,id):
         self.cursor = self.conn.cursor()

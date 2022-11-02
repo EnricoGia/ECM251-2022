@@ -2,6 +2,7 @@
 
 from src.models.product import Product
 from src.dao.product_dao import ProductDAO
+import streamlit as st
 
 class ProductController():
     def __init__(self):
@@ -15,4 +16,11 @@ class ProductController():
     
     def get_products(self):
         return self._products
+    
+    def register_product(self, name, price, url):
+        if(name and price and url):
+            ProductDAO.get_instance().register_product(name, price, url)
+        else:
+            pass
+        
 

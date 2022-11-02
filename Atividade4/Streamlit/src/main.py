@@ -156,6 +156,8 @@ if st.session_state['Login'] == 'aprovado':
         
     with tab3:
         if 'Cart' in st.session_state:
+            st.title("Carrinho")
+            st.markdown("***")
 
             row = st.container()
             col1,col2,col3,col4 = st.columns(4)
@@ -177,6 +179,19 @@ if st.session_state['Login'] == 'aprovado':
             col1.markdown("# Preço Total:")
             col2.markdown("# R\$ %.2f" % st.session_state['Cart'].total_price())
     with tab4:
-        st.markdown("Teste")
+        st.title("Novo produto")
+        st.markdown("***")
+
+        name = st.text_input(
+            label="Nome"
+            )
+        price = st.text_input(
+            label = "Preço"
+        )
+        url = st.text_input(
+            label= "URL")
+
+        st.button(label = "Adicionar novo produto", on_click = P_Controller.register_product, args = (name, price, url))
+
             
    
