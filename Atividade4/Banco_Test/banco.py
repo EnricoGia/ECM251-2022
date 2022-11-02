@@ -16,7 +16,18 @@ SELECT * FROM Users;
 
 
 
+CREATE TABLE Products(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      price FLOAT NOT NULL UNIQUE,
+      url TEXT NOT NULL
+);
 
+INSERT INTO Products (name, price, url)
+VALUES("Elden Ring",199.90, "https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/aGhopp3MHppi7kooGE2Dtt8C.png"),
+("Dark Souls (PC)", 99.90 ,"https://upload.wikimedia.org/wikipedia/pt/7/7c/Dark_Souls_1_capa.png");
+
+SELECT * FROM Products;
 
 """
 

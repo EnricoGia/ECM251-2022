@@ -15,8 +15,9 @@ with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
 if 'Login' not in st.session_state:
-    for user in User_Controller.get_all_info():
+    for user in User_Controller.get_all_info(): ### RETIRAR
         print(user)
+
     st.session_state['Login'] = 'negado'
     st.session_state['Usuario'] = ''
     st.session_state['Email'] = ''
@@ -84,7 +85,7 @@ if st.session_state['Login'] == 'errado':
     st.markdown("# Email ou senha incorreto!")
         
 if st.session_state['Login'] == 'aprovado':
-    tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Perfil", "Home", "Carrinho", "Novo produto"])
     with tab1:
         if st.session_state['Profile'] == "info":
             st.title("Perfil")
@@ -131,41 +132,28 @@ if st.session_state['Login'] == 'aprovado':
 
         col1,col2 = st.columns(2,gap="large")
         
-        with col1:
-            c = st.container()
-            prdct = P_Controller.get_product(index = 0)
-            c.markdown("## %s" % prdct.get_name())
-            c.image("%s" % prdct.get_url())
-            c.markdown("#### R$ %.2f" % prdct.get_price())
-            quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1)
-            c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity))
-            
-        with col2:
-            c = st.container()
-            prdct = P_Controller.get_product(index = 1)
-            c.markdown("## %s" % prdct.get_name())
-            c.image("%s" % prdct.get_url())
-            c.markdown("#### R$ %.2f" % prdct.get_price())
-            quantity = c.number_input(label = "", format = "%i", step = 1,min_value =1,key=3)
-            c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 3)
-        
-        with col1:
-            c = st.container()
-            prdct = P_Controller.get_product(index = 2)
-            c.markdown("## %s" % prdct.get_name())
-            c.image("%s" % prdct.get_url())
-            c.markdown("#### R$ %.2f" % prdct.get_price())
-            quantity = c.number_input(label = "", format = "%i", step = 1,min_value = 1,key = 4)
-            c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 4)
+        for (i,product) in enumerate(P_Controller.get_products()):
+            try:
+                if(i%2 == 0):
+                    with col1:
+                        c = st.container()
+                        c.markdown("## %s" % product.get_name())
+                        c.image("%s" % product.get_url())
+                        c.markdown("#### R$ %.2f" % product.get_price())
+                        quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1, key = i)
+                        c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(product, quantity), key = i)
 
-        with col2:
-            c = st.container()
-            prdct = P_Controller.get_product(index = 3)
-            c.markdown("## %s" % prdct.get_name())
-            c.image("%s" % prdct.get_url())
-            c.markdown("#### R$ %.2f" % prdct.get_price())
-            quantity = c.number_input(label = "", format = "%i", step = 1,min_value = 1,key=5)
-            c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(prdct,quantity),key = 5)
+                else:
+                    with col2:
+                        c = st.container()
+                        c.markdown("## %s" % product.get_name())
+                        c.image("%s" % product.get_url())
+                        c.markdown("#### R$ %.2f" % product.get_price())
+                        quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1, key = i)
+                        c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(product,quantity), key = i)
+            except Exception: #URL não encontrada
+                pass
+        
     with tab3:
         if 'Cart' in st.session_state:
 
@@ -188,6 +176,7 @@ if st.session_state['Login'] == 'aprovado':
              
             col1.markdown("# Preço Total:")
             col2.markdown("# R\$ %.2f" % st.session_state['Cart'].total_price())
-            
+    with tab4:
+        st.markdown("Teste")
             
    
