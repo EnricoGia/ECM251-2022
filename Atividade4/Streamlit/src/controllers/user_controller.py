@@ -51,3 +51,9 @@ class UserController():
     def change_profile(self, email, password, email_now):
         if(UserDAO.get_instance().change_profile(email, password, email_now)):
             st.session_state["Email"] = email
+    
+    def add_new_product_screen(self):
+        st.session_state["Login"] = "new_product"
+
+    def default_screen(self):
+        st.session_state["Login"] = "aprovado"

@@ -20,7 +20,8 @@ class ProductController():
     def register_product(self, name, price, url):
         if(name and price and url):
             ProductDAO.get_instance().register_product(name, price, url)
+            st.success("Produto registrado")
         else:
-            pass
+            st.warning("Registro inválido")
         
 

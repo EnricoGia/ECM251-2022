@@ -85,7 +85,7 @@ if st.session_state['Login'] == 'errado':
     st.markdown("# Email ou senha incorreto!")
         
 if st.session_state['Login'] == 'aprovado':
-    tab1, tab2, tab3, tab4 = st.tabs(["Perfil", "Home", "Carrinho", "Novo produto"])
+    tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
     with tab1:
         if st.session_state['Profile'] == "info":
             st.title("Perfil")
@@ -127,6 +127,8 @@ if st.session_state['Login'] == 'aprovado':
     with tab2:
 
         st.title("Home")
+
+        st.button(label = "Adicionar novo produto", on_click = User_Controller.add_new_product_screen)
 
         st.markdown("***")
 
@@ -178,20 +180,26 @@ if st.session_state['Login'] == 'aprovado':
              
             col1.markdown("# Preço Total:")
             col2.markdown("# R\$ %.2f" % st.session_state['Cart'].total_price())
-    with tab4:
-        st.title("Novo produto")
-        st.markdown("***")
+    
+if st.session_state["Login"] == "new_product":
+    
+    
+    st.title("Novo produto")
+    st.markdown("***")
 
-        name = st.text_input(
-            label="Nome"
-            )
-        price = st.text_input(
-            label = "Preço"
+    name = st.text_input(
+        label="Nome"
         )
-        url = st.text_input(
-            label= "URL")
+    price = st.text_input(
+        label = "Preço"
+    )
+    url = st.text_input(
+        label= "URL")
 
+    col1,col2 = st.columns(2)
+    with col1:
+        st.button(label = "Voltar", on_click = User_Controller.default_screen)
+    with col2:
         st.button(label = "Adicionar novo produto", on_click = P_Controller.register_product, args = (name, price, url))
-
             
    
