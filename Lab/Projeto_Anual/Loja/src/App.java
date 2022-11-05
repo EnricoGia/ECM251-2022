@@ -3,12 +3,16 @@ package Loja.src;
 public class App {
     public static void main(String[] args) throws Exception {
         
+        Conta conta1 = new Conta("Isaac", 48, "janea.nitzsc@hotmail.com", "Brasil");
+        Usuario usuario1 = new Usuario("Sac");
 
-        Usuario user1 = new Usuario("José", 22,"JGames",22.3f);
+        conta1.setUsuario(usuario1);
+
         Jogo jogo1 = new Jogo("Castlevania", "Um clássico dos jogos 2D", 50.0);
-
-        Usuario user2 = new Usuario("Luigi", 22,"LL__",22.3f);
         Jogo jogo2 = new Jogo("Metroid", "Um clássico dos jogos 2D", 20.0);
+
+        usuario1.escreveReview(true, "Muito bom", jogo1);
+        conta1.getUsuario().escreveReview(true, "Legal", jogo2);
 
         jogo1.adicionaTipo("Metroidvania");
         jogo1.adicionaTipo("Ação");
@@ -19,9 +23,6 @@ public class App {
         jogo2.adicionaTipo("Plataforma");
        
         jogo1.mostraTipo();
-        
-        user1.escreveReview(true, "Muito Bom", jogo1);
-        user2.escreveReview(true, "Maneiro", jogo2);
 
         jogo1.mostraReview();
         jogo2.mostraReview();
