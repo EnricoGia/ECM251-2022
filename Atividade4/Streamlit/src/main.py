@@ -180,6 +180,8 @@ if st.session_state['Login'] == 'aprovado':
              
             col1.markdown("# Preço Total:")
             col2.markdown("# R\$ %.2f" % st.session_state['Cart'].total_price())
+            st.markdown("***")
+            st.button(label = "Finalizar pedido", on_click=st.session_state["Cart"].empty_cart)
     
 if st.session_state["Login"] == "new_product":
     

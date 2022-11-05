@@ -1,5 +1,5 @@
 # Enrico Giannobile 19.00610-0
-
+import streamlit as st
 from src.models.cart import Cart
 class CartController():
     def __init__(self):
@@ -28,3 +28,6 @@ class CartController():
         for i in products:
            total += (i[0].get_price()*i[1])
         return total
+    
+    def empty_cart(self):
+        self._cart = Cart()
