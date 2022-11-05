@@ -37,7 +37,11 @@ class UserController():
         st.session_state["Login"] = "registro"
 
     def register_login(self, name, email, password, cpf):
-        UserDAO.get_instance().register_login(name, email, password, cpf)
+        if(name and email and password and cpf):
+            UserDAO.get_instance().register_login(name, email, password, cpf)
+            st.success("Login registrado")
+        else:
+            st.warning("Registro inválido")
 
     def get_all_info(self):
         return UserDAO.get_instance().get_all_info()
