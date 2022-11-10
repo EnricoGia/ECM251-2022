@@ -139,8 +139,8 @@ if st.session_state['Login'] == 'aprovado':
                 if(i%2 == 0):
                     with col1:
                         c = st.container()
-                        c.markdown("## %s" % product.get_name())
                         c.image("%s" % product.get_url())
+                        c.markdown("## %s" % product.get_name())  
                         c.markdown("#### R$ %.2f" % product.get_price())
                         quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1, key = i)
                         c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(product, quantity), key = i)
@@ -148,8 +148,8 @@ if st.session_state['Login'] == 'aprovado':
                 else:
                     with col2:
                         c = st.container()
-                        c.markdown("## %s" % product.get_name())
                         c.image("%s" % product.get_url())
+                        c.markdown("## %s" % product.get_name())
                         c.markdown("#### R$ %.2f" % product.get_price())
                         quantity = c.number_input(label = "", format = "%i", step = 1, min_value = 1, key = i)
                         c.button(label = "Adicionar",on_click = st.session_state['Cart'].add_product, args=(product,quantity), key = i)
