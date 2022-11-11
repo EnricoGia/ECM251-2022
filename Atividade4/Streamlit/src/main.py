@@ -15,9 +15,6 @@ with open("style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
 if 'Login' not in st.session_state:
-    for user in User_Controller.get_all_info(): ### RETIRAR
-        print(user)
-
     st.session_state['Login'] = 'negado'
     st.session_state['Usuario'] = ''
     st.session_state['Email'] = ''

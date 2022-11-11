@@ -39,7 +39,6 @@ class UserController():
     def register_login(self, name, email, password, cpf):
         if(name and email and password and cpf):
             UserDAO.get_instance().register_login(name, email, password, cpf)
-            st.success("Login registrado")
         else:
             st.warning("Registro inválido")
 
