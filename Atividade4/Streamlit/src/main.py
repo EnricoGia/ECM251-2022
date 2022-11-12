@@ -7,19 +7,19 @@ from src.controllers.user_controller import UserController
 from src.controllers.cart_controller import CartController
 
 
-
+# Atualizam constantemente
 P_Controller = ProductController()
 User_Controller = UserController()
+#
 
-with open("style.css") as f:
-    st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
-
+# Atualizam apenas uma vez
 if 'Login' not in st.session_state:
     st.session_state['Login'] = 'negado'
     st.session_state['Usuario'] = ''
     st.session_state['Email'] = ''
     st.session_state['Profile'] = "info"
     st.session_state['Cart'] = CartController()
+#
 
 with st.sidebar:
     if st.session_state['Login'] == 'errado' or st.session_state['Login'] == 'negado':

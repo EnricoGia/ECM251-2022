@@ -1,3 +1,5 @@
+# Enrico Giannobile 19.00610-0
+
 import sqlite3
 from src.models.product import Product
 class ProductDAO:
@@ -21,11 +23,11 @@ class ProductDAO:
         self.cursor.execute("""
             SELECT * FROM Products;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Product(name = resultado[1], price = resultado[2], url = resultado[3]))
+        results = []
+        for result in self.cursor.fetchall():
+            results.append(Product(name = result[1], price = result[2], url = result[3]))
         self.cursor.close()
-        return resultados
+        return results
     
     def register_product(self, name, price, url):
         try:
@@ -38,56 +40,3 @@ class ProductDAO:
             self.cursor.close()
         except Exception:
             pass
-    
-    def pegar_item(self,id):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Itens
-            WHERE id = '{id}';
-        """)
-        item = None
-        resultado =  self.cursor.fetchone()
-        if resultado:
-            item = Product(id=resultado[0], nome=resultado[1], preco=resultado[2])
-        self.cursor.close()
-        return item
-
-    def atualizar_item(self,item):
-        try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                UPDATE Itens SET 
-                nome = '{item.nome}',
-                preco = {item.preco}
-                WHERE id = '{item.id}' 
-            """)
-            self.conn.commit()
-            self.cursor.close()
-        except:
-            return False
-        return True
-
-    def deletar_item(self,id):
-        try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                DELETE FROM Itens
-                Where id = '{id}'  
-            """)
-            self.conn.commit()
-            self.cursor.close()
-        except:
-            return False
-        return True
-
-    def search_all_for_name(self,nome):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Itens
-            WHERE nome LIKE '{nome}%'; 
-        """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Product(id=resultado[0], nome=resultado[1], preco=resultado[2]))
-        self.cursor.close()
-        return resultados

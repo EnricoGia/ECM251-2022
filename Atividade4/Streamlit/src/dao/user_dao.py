@@ -1,3 +1,5 @@
+# Enrico Giannobile 19.00610-0
+
 import sqlite3
 import streamlit as st
 from src.models.user import User
@@ -22,11 +24,11 @@ class UserDAO:
         self.cursor.execute("""
             SELECT * FROM Users;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(User(name=resultado[1], email=resultado[2], password=resultado[3]))
+        results = []
+        for result in self.cursor.fetchall():
+            results.append(User(name=result[1], email=result[2], password=result[3]))
         self.cursor.close()
-        return resultados
+        return results
 
     def register_login(self, name, email, password, cpf):
         try:
@@ -49,11 +51,11 @@ class UserDAO:
         self.cursor.execute("""
             SELECT * FROM Users;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(str(resultado[0]) + " " + resultado[1] + " " + resultado[2] + " " + resultado[3] + " " + resultado[4] + " ")
+        results = []
+        for result in self.cursor.fetchall():
+            results.append(str(result[0]) + " " + result[1] + " " + result[2] + " " + result[3] + " " + result[4] + " ")
         self.cursor.close()
-        return resultados
+        return results
     
     def change_profile(self, email, password, email_now):
         try:
